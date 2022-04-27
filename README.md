@@ -455,6 +455,7 @@ Refer to [the official Kubernetes documentation on Secrets](https://kubernetes.i
 
 Jan '22 - plan to add support for k3s enviroments
 March '22 - actually add support for k3s enviroments and auto LXCFS detection handling
+April '22 - actually, actually add support for k3s enviroments and auto LXCFS detection handling
   
 `kubectl-debug` has been replaced by kubernetes [ephemeral containers](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers).
  Ephemeral containers feature is in beta from kubernetes 1.23
