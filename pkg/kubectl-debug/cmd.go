@@ -1103,6 +1103,14 @@ func (o *DebugOptions) getAgentPod() *corev1.Pod {
 							Path: "/var/lib/containerd",
 						},
 					},
+				},
+				{
+					Name: "runk3scontainerd",
+					VolumeSource: corev1.VolumeSource{
+						HostPath: &corev1.HostPathVolumeSource{
+							Path: "/run/k3s/containerd",
+						},
+					},
 				},				
 				{
 					Name: "runrunc",
@@ -1116,7 +1124,7 @@ func (o *DebugOptions) getAgentPod() *corev1.Pod {
 			RestartPolicy: corev1.RestartPolicyNever,
 		},
 	}
-	fmt.Fprintf(o.Out, "Agent Pod info: [Name:%s, Namespace:%s, Image:%s, HostPort:%d, ContainerPort:%d]\n", agentPod.ObjectMeta.Name, agentPod.ObjectMeta.Namespace, agentPod.Spec.Containers[0].Image, agentPod.Spec.Containers[0].Ports[0].HostPort, agentPod.Spec.Containers[0].Ports[0].ContainerPort)
+	fmt.Fprintf(o.Out, "Agent Pod info: [name:%s, namespace:%s, image:%s, hostPort:%d, containerPort:%d]\n", agentPod.ObjectMeta.Name, agentPod.ObjectMeta.Namespace, agentPod.Spec.Containers[0].Image, agentPod.Spec.Containers[0].Ports[0].HostPort, agentPod.Spec.Containers[0].Ports[0].ContainerPort)
 	return agentPod
 }
 
