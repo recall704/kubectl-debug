@@ -1036,6 +1036,10 @@ func (o *DebugOptions) getAgentPod() *corev1.Pod {
 							MountPath: "/run/containerd",
 						},
 						{
+							Name:      "runk3scontainerd",
+							MountPath: "/run/k3s/containerd",
+						},
+						{
 							Name:      "runrunc",
 							MountPath: "/run/runc",
 						},
