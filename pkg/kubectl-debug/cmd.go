@@ -695,7 +695,7 @@ func (o *DebugOptions) Run() error {
 		}
 		uri, err := url.Parse(fmt.Sprintf("http://%s:%d", targetHost, o.AgentPort))
 		if err != nil {
-			o.Logger.Printf("error parsing url http://%s:%d", targetHost, o.AgentPort))
+			o.Logger.Printf("error parsing url http://%s:%d", targetHost, o.AgentPort)
 			return err
 		}
 		uri.Path = fmt.Sprintf("/api/v1/debug")
@@ -1165,13 +1165,13 @@ type defaultPortForwarder struct {
 func (f *defaultPortForwarder) ForwardPorts(method string, url *url.URL, opts *DebugOptions) error {
 	transport, upgrader, err := spdy.RoundTripperFor(opts.Config)
 	if err != nil {
-		o.Logger.Printf("error with setting up spdy forwarder")
+		opts.Logger.Printf("error with setting up spdy forwarder")
 		return err
 	}
 	dialer := spdy.NewDialer(upgrader, &http.Client{Transport: transport}, method, url)
 	fw, err := portforward.New(dialer, opts.Ports, opts.StopChannel, opts.ReadyChannel, f.Out, f.ErrOut)
 	if err != nil {
-		o.Logger.Printf("error with NewDialer")
+		opts.Logger.Printf("error with NewDialer")
 		return err
 	}
 	return fw.ForwardPorts()
