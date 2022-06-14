@@ -40,7 +40,8 @@ How does it work?
   
 `kubectl-debug` is not related to `kubectl debug`
   
-`kubectl-debug` has been largely replaced by kubernetes [ephemeral containers](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers). 
+`kubectl-debug` has been largely replaced by kubernetes [ephemeral containers](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers).
+
 However... Ephemeral containers will not enter the process namespace of the target container unless the target container has been deployed in a pod whose spec includes `shareProcessNamespace: true` see [sharing process namespaces](https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/). 
 For many in-place debugging activities (such as attaching a debugger to running process(es) or performing stack traces) kubectl-debug remains an excellent tool.
 
@@ -459,7 +460,8 @@ Refer to [the official Kubernetes documentation on Secrets](https://kubernetes.i
 
 June' 22 - add support for k3s enviroments
   
-`kubectl-debug` has been largely replaced by kubernetes [ephemeral containers](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers). 
+`kubectl-debug` has been largely replaced by kubernetes [ephemeral containers](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers).
+
 However... Ephemeral containers will not enter the process namespace of the target container unless the target container has been deployed in a pod whose spec includes `shareProcessNamespace: true` see [sharing process namespaces](https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/). 
 For many in-place debugging activities (such as attaching a debugger to running process(es) or performing stack traces) kubectl-debug remains an excellent tool.
 
