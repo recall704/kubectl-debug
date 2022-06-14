@@ -40,7 +40,7 @@ How does it work?
   
 `kubectl-debug` is not related to `kubectl debug`
   
-`kubectl-debug` has been largely replaced by kubernetes [ephemeral containers](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers).  
+`kubectl-debug` has been largely replaced by kubernetes [ephemeral containers](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers). However, ephermal containers will not enter the process namespace of the targe container unless the target container has been deployed in a pod whose spec includes `shareProcessNamespace: true` see [sharing process namespaces](https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/). For many in-place debugging activities (such as attaching a debugger to running process(es) or performing stack traces) kubectl-debug remains an excellent tool.
  Ephemeral containers feature is in beta (enabled by default) from kubernetes 1.23  
  Ephemeral containers feature is in alpha from kubernetes 1.16 to 1.22  
  In Kuberenetes, by default, you are required to explicitly enable alpha features (alpha features are not enabled by default). If you are using Azure AKS (and perhaps others) you are not able, nor permitted, to configure kubernetes feature flags and so you will need a solution like the one provided by this github project.
@@ -453,11 +453,9 @@ Refer to [the official Kubernetes documentation on Secrets](https://kubernetes.i
 
 # Roadmap
 
-Jan '22 - plan to add support for k3s enviroments
-March '22 - actually add support for k3s enviroments and auto LXCFS detection handling
-April '22 - actually, actually add support for k3s enviroments and auto LXCFS detection handling
+June' 22 - add support for k3s enviroments
   
-`kubectl-debug` has been replaced by kubernetes [ephemeral containers](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers).
+`kubectl-debug` has been largely replaced by kubernetes [ephemeral containers](https://kubernetes.io/docs/concepts/workloads/pods/ephemeral-containers). However, ephermal containers will not enter the process namespace of the targe container unless the target container has been deployed in a pod whose spec includes `shareProcessNamespace: true` see [sharing process namespaces](https://kubernetes.io/docs/tasks/configure-pod-container/share-process-namespace/). For many in-place debugging activities (such as attaching a debugger to running process(es) or performing stack traces) kubectl-debug remains an excellent tool.
  Ephemeral containers feature is in beta from kubernetes 1.23
  Ephemeral containers feature is in alpha from kubernetes 1.16 to 1.22
   
