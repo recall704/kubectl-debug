@@ -1039,11 +1039,6 @@ func (o *DebugOptions) getAgentPod() *corev1.Pod {
 							Name:      "runrunc",
 							MountPath: "/run/runc",
 						},
-						{
-							Name:             "lxcfs",
-							MountPath:        "/var/lib/lxc",
-							MountPropagation: &prop,
-						},
 					},
 					Ports: []corev1.ContainerPort{
 						{
@@ -1068,15 +1063,6 @@ func (o *DebugOptions) getAgentPod() *corev1.Pod {
 					VolumeSource: corev1.VolumeSource{
 						HostPath: &corev1.HostPathVolumeSource{
 							Path: "/sys/fs/cgroup",
-						},
-					},
-				},
-				{
-					Name: "lxcfs",
-					VolumeSource: corev1.VolumeSource{
-						HostPath: &corev1.HostPathVolumeSource{
-							Path: "/var/lib/lxc",
-							Type: &directoryCreate,
 						},
 					},
 				},
@@ -1115,6 +1101,22 @@ func (o *DebugOptions) getAgentPod() *corev1.Pod {
 			},
 			RestartPolicy: corev1.RestartPolicyNever,
 		},
+	}
+	if o.IsLxcfsEnabled {
+		agentPod.Spec.Volumes = append(agentPod.Spec.Volumes, corev1.Volume{
+			Name: "lxcfs",
+			VolumeSource: corev1.VolumeSource{
+				HostPath: &corev1.HostPathVolumeSource{
+					Path: "/var/lib/lxc",
+					Type: &directoryCreate,
+				},
+			},
+		})
+		agentPod.Spec.Containers[0].VolumeMounts = append(agentPod.Spec.Containers[0].VolumeMounts, corev1.VolumeMount{
+			Name:             "lxcfs",
+			MountPath:        "/var/lib/lxc",
+			MountPropagation: &prop,
+		})
 	}
 	fmt.Fprintf(o.Out, "Agent Pod info: [Name:%s, Namespace:%s, Image:%s, HostPort:%d, ContainerPort:%d]\n", agentPod.ObjectMeta.Name, agentPod.ObjectMeta.Namespace, agentPod.Spec.Containers[0].Image, agentPod.Spec.Containers[0].Ports[0].HostPort, agentPod.Spec.Containers[0].Ports[0].ContainerPort)
 	return agentPod
